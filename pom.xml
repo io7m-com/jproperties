@@ -75,15 +75,6 @@
     <maven>2.2.1</maven>
   </prerequisites>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-      <version>4.11</version>
-    </dependency>
-  </dependencies>
-
   <reporting>
     <plugins>
       <plugin>

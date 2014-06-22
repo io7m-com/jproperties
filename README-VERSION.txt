@@ -1,1 +1,1 @@
-io7m-jproperties 0.3.0
+io7m-jproperties 1.0.0

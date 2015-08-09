@@ -5,12 +5,13 @@
   xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
   <properties>
-    <title>Reports</title>
+    <title>io7m-jproperties</title>
   </properties>
 
   <body>
-    <subsection name="Reports">
-      No reports are currently available.
+    <subsection name="jproperties">
+      <p>The <var>jproperties</var> package implements a set of
+      functions and types for dealing with properties in Java.</p>
     </subsection>
   </body>
 

@@ -13,6 +13,13 @@
       <p>The <var>jproperties</var> package implements a set of
       functions and types for dealing with properties in Java.</p>
     </subsection>
+    <subsection name="Features">
+      <ul>
+        <li>Functions for accessing <tt>java.util.Properties</tt> in a fail-early and type-safe manner.</li>
+        <li>Full unit test coverage.</li>
+        <li>ISC license.</li>
+      </ul>
+    </subsection>
   </body>
 
 </document>

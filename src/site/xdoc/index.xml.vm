@@ -17,6 +17,7 @@
       <ul>
         <li>Functions for accessing <tt>java.util.Properties</tt> in a fail-early and type-safe manner.</li>
         <li>Full unit test coverage.</li>
+        <li><a href="https://www.osgi.org/">OSGi</a>-ready.</li>
         <li>ISC license.</li>
       </ul>
     </subsection>

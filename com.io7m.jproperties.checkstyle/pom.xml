@@ -7,15 +7,19 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.io7m.jproperties</groupId>
-    <artifactId>io7m-jproperties</artifactId>
+    <artifactId>com.io7m.jproperties</artifactId>
     <version>1.0.2</version>
   </parent>
-  <artifactId>io7m-jproperties-checkstyle</artifactId>
+  <artifactId>com.io7m.jproperties.checkstyle</artifactId>
 
   <packaging>jar</packaging>
-  <name>io7m-jproperties-checkstyle</name>
+  <name>com.io7m.jproperties.checkstyle</name>
   <description>~Typed property handling (Checkstyle policy)</description>
   <url>http://io7m.github.io/jproperties/</url>
+
+  <properties>
+    <io7m.api.previousArtifactId>io7m-jproperties-checkstyle</io7m.api.previousArtifactId>
+  </properties>
 
   <scm>
     <url>${project.parent.scm.url}</url>

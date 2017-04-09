@@ -7,15 +7,20 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.io7m.jproperties</groupId>
-    <artifactId>io7m-jproperties</artifactId>
-    <version>1.0.2</version>
+    <artifactId>com.io7m.jproperties</artifactId>
+    <version>1.0.3</version>
   </parent>
-  <artifactId>io7m-jproperties-documentation</artifactId>
+  <artifactId>com.io7m.jproperties.documentation</artifactId>
 
   <packaging>jar</packaging>
-  <name>io7m-jproperties-documentation</name>
+  <name>com.io7m.jproperties.documentation</name>
   <description>Typed property handling (Documentation)</description>
   <url>http://io7m.github.io/jproperties/</url>
+
+  <properties>
+    <io7m.api.previousArtifactId>io7m-jproperties-documentation</io7m.api.previousArtifactId>
+    <mdep.analyze.skip>true</mdep.analyze.skip>
+  </properties>
 
   <scm>
     <url>${project.parent.scm.url}</url>
@@ -26,7 +31,7 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>io7m-jproperties-core</artifactId>
+      <artifactId>com.io7m.jproperties.core</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>

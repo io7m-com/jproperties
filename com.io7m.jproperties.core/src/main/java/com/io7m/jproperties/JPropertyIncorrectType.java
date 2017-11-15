@@ -16,17 +16,12 @@
 
 package com.io7m.jproperties;
 
-import com.io7m.jequality.annotations.EqualityReference;
-
 /**
- * <p>
- * The type of exceptions raised upon accessing a property that is not of the
- * expected type.
- * </p>
+ * <p> The type of exceptions raised upon accessing a property that is not of
+ * the expected type. </p>
  */
 
-@EqualityReference public final class JPropertyIncorrectType extends
-  JPropertyException
+public final class JPropertyIncorrectType extends JPropertyException
 {
   private static final long serialVersionUID;
 
@@ -36,9 +31,8 @@ import com.io7m.jequality.annotations.EqualityReference;
 
   /**
    * Construct an exception with the given message.
-   * 
-   * @param message
-   *          The message
+   *
+   * @param message The message
    */
 
   public JPropertyIncorrectType(

@@ -17,25 +17,7 @@
   <description>Typed property handling (Core)</description>
   <url>http://io7m.github.io/jproperties/</url>
 
-  <properties>
-    <io7m.api.previousArtifactId>io7m-jproperties-core</io7m.api.previousArtifactId>
-  </properties>
-
-  <scm>
-    <url>${project.parent.scm.url}</url>
-    <connection>${project.parent.scm.connection}</connection>
-    <developerConnection>${project.parent.scm.developerConnection}</developerConnection>
-  </scm>
-
   <dependencies>
-    <dependency>
-      <groupId>com.io7m.jnull</groupId>
-      <artifactId>com.io7m.jnull.core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.io7m.jequality</groupId>
-      <artifactId>com.io7m.jequality.core</artifactId>
-    </dependency>
     <dependency>
       <groupId>com.io7m.junreachable</groupId>
       <artifactId>com.io7m.junreachable.core</artifactId>
@@ -44,11 +26,6 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.reflections</groupId>
-      <artifactId>reflections</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

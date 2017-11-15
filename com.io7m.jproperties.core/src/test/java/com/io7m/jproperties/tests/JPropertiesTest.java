@@ -16,6 +16,12 @@
 
 package com.io7m.jproperties.tests;
 
+import com.io7m.jproperties.JProperties;
+import com.io7m.jproperties.JPropertyIncorrectType;
+import com.io7m.jproperties.JPropertyNonexistent;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,98 +30,92 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Properties;
 
-import javax.annotation.Nonnull;
-
-import org.junit.Assert;
-import org.junit.Test;
-
-import com.io7m.jequality.annotations.EqualityReference;
-import com.io7m.jproperties.JProperties;
-import com.io7m.jproperties.JPropertyIncorrectType;
-import com.io7m.jproperties.JPropertyNonexistent;
-
 /**
  * Tests to ensure the property interface is working correctly.
  */
 
-@SuppressWarnings("static-method") @EqualityReference public class JPropertiesTest
+public final class JPropertiesTest
 {
-  @Test public final void testGetBoolean()
+  @Test
+  public void testGetBoolean()
     throws JPropertyNonexistent,
-      JPropertyIncorrectType
+    JPropertyIncorrectType
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "true");
     Assert.assertTrue(true == (JProperties.getBoolean(properties, "key")));
   }
 
-  @Test(expected = JPropertyIncorrectType.class) public final
-    void
-    testGetBooleanBadType()
-      throws JPropertyNonexistent,
-        JPropertyIncorrectType
+  @Test(expected = JPropertyIncorrectType.class)
+  public void
+  testGetBooleanBadType()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "Z");
     Assert.assertTrue(false == (JProperties.getBoolean(properties, "key")));
   }
 
-  @Test public final void testGetBooleanFalse()
+  @Test
+  public void testGetBooleanFalse()
     throws JPropertyNonexistent,
-      JPropertyIncorrectType
+    JPropertyIncorrectType
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "false");
     Assert.assertTrue(false == (JProperties.getBoolean(properties, "key")));
   }
 
-  @Test(expected = JPropertyNonexistent.class) public final
-    void
-    testGetBooleanMissing()
-      throws JPropertyNonexistent,
-        JPropertyIncorrectType
+  @Test(expected = JPropertyNonexistent.class)
+  public void
+  testGetBooleanMissing()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType
   {
     JProperties.getBoolean(new Properties(), "key");
   }
 
-  @Test public final void testGetInteger()
+  @Test
+  public void testGetInteger()
     throws JPropertyNonexistent,
-      JPropertyIncorrectType
+    JPropertyIncorrectType
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "23");
     Assert.assertEquals(
       BigInteger.valueOf(23),
       JProperties.getBigInteger(properties, "key"));
   }
 
-  @Test(expected = JPropertyIncorrectType.class) public final
-    void
-    testGetIntegerBadType()
-      throws JPropertyNonexistent,
-        JPropertyIncorrectType
+  @Test(expected = JPropertyIncorrectType.class)
+  public void
+  testGetIntegerBadType()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "Z");
     Assert.assertEquals(
       BigInteger.valueOf(23),
       JProperties.getBigInteger(properties, "key"));
   }
 
-  @Test(expected = JPropertyNonexistent.class) public final
-    void
-    testGetIntegerMissing()
-      throws JPropertyNonexistent,
-        JPropertyIncorrectType
+  @Test(expected = JPropertyNonexistent.class)
+  public void
+  testGetIntegerMissing()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType
   {
     JProperties.getBigInteger(new Properties(), "key");
   }
 
-  @Test public final void testGetOptionalBoolean()
+  @Test
+  public void testGetOptionalBoolean()
     throws JPropertyIncorrectType,
-      JPropertyNonexistent
+    JPropertyNonexistent
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "true");
     Assert.assertTrue(true == (JProperties.getBooleanOptional(
       properties,
@@ -123,22 +123,23 @@ import com.io7m.jproperties.JPropertyNonexistent;
       false)));
   }
 
-  @Test(expected = JPropertyIncorrectType.class) public final
-    void
-    testGetOptionalBooleanBadType()
-      throws JPropertyIncorrectType,
-        JPropertyNonexistent
+  @Test(expected = JPropertyIncorrectType.class)
+  public void
+  testGetOptionalBooleanBadType()
+    throws JPropertyIncorrectType,
+    JPropertyNonexistent
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "Z");
     JProperties.getBooleanOptional(properties, "key", false);
   }
 
-  @Test public final void testGetOptionalBooleanFalse()
+  @Test
+  public void testGetOptionalBooleanFalse()
     throws JPropertyIncorrectType,
-      JPropertyNonexistent
+    JPropertyNonexistent
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "false");
     Assert.assertTrue(false == (JProperties.getBooleanOptional(
       properties,
@@ -146,9 +147,10 @@ import com.io7m.jproperties.JPropertyNonexistent;
       true)));
   }
 
-  @Test public final void testGetOptionalBooleanMissing()
+  @Test
+  public void testGetOptionalBooleanMissing()
     throws JPropertyIncorrectType,
-      JPropertyNonexistent
+    JPropertyNonexistent
   {
     Assert.assertTrue(true == (JProperties.getBooleanOptional(
       new Properties(),
@@ -156,11 +158,13 @@ import com.io7m.jproperties.JPropertyNonexistent;
       true)));
   }
 
-  @SuppressWarnings("null") @Test public final void testGetOptionalInteger()
+  @SuppressWarnings("null")
+  @Test
+  public void testGetOptionalInteger()
     throws JPropertyIncorrectType,
-      JPropertyNonexistent
+    JPropertyNonexistent
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "23");
     Assert.assertEquals(
       BigInteger.valueOf(23),
@@ -170,13 +174,14 @@ import com.io7m.jproperties.JPropertyNonexistent;
         BigInteger.valueOf(47)));
   }
 
-  @SuppressWarnings("null") @Test(expected = JPropertyIncorrectType.class) public final
-    void
-    testGetOptionalIntegerBadType()
-      throws JPropertyIncorrectType,
-        JPropertyNonexistent
+  @SuppressWarnings("null")
+  @Test(expected = JPropertyIncorrectType.class)
+  public void
+  testGetOptionalIntegerBadType()
+    throws JPropertyIncorrectType,
+    JPropertyNonexistent
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "Z");
     JProperties.getBigIntegerOptional(
       properties,
@@ -184,11 +189,12 @@ import com.io7m.jproperties.JPropertyNonexistent;
       BigInteger.valueOf(47));
   }
 
-  @SuppressWarnings("null") @Test public final
-    void
-    testGetOptionalIntegerMissing()
-      throws JPropertyIncorrectType,
-        JPropertyNonexistent
+  @SuppressWarnings("null")
+  @Test
+  public void
+  testGetOptionalIntegerMissing()
+    throws JPropertyIncorrectType,
+    JPropertyNonexistent
   {
     Assert.assertEquals(
       BigInteger.valueOf(47),
@@ -198,11 +204,13 @@ import com.io7m.jproperties.JPropertyNonexistent;
         BigInteger.valueOf(47)));
   }
 
-  @SuppressWarnings("null") @Test public final void testGetOptionalReal()
+  @SuppressWarnings("null")
+  @Test
+  public void testGetOptionalReal()
     throws JPropertyIncorrectType,
-      JPropertyNonexistent
+    JPropertyNonexistent
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "23.0");
     Assert.assertEquals(
       new BigDecimal("23.0"),
@@ -212,13 +220,14 @@ import com.io7m.jproperties.JPropertyNonexistent;
         BigDecimal.valueOf(47)));
   }
 
-  @SuppressWarnings("null") @Test(expected = JPropertyIncorrectType.class) public final
-    void
-    testGetOptionalRealBadType()
-      throws JPropertyIncorrectType,
-        JPropertyNonexistent
+  @SuppressWarnings("null")
+  @Test(expected = JPropertyIncorrectType.class)
+  public void
+  testGetOptionalRealBadType()
+    throws JPropertyIncorrectType,
+    JPropertyNonexistent
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "Z");
     JProperties.getBigDecimalOptional(
       properties,
@@ -226,11 +235,12 @@ import com.io7m.jproperties.JPropertyNonexistent;
       BigDecimal.valueOf(23));
   }
 
-  @SuppressWarnings("null") @Test public final
-    void
-    testGetOptionalRealMissing()
-      throws JPropertyIncorrectType,
-        JPropertyNonexistent
+  @SuppressWarnings("null")
+  @Test
+  public void
+  testGetOptionalRealMissing()
+    throws JPropertyIncorrectType,
+    JPropertyNonexistent
   {
     Assert.assertEquals(
       BigDecimal.valueOf(23.0),
@@ -240,17 +250,19 @@ import com.io7m.jproperties.JPropertyNonexistent;
         BigDecimal.valueOf(23.0)));
   }
 
-  @Test public final void testGetOptionalString()
+  @Test
+  public void testGetOptionalString()
     throws JPropertyNonexistent
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "old_value");
     Assert.assertEquals(
       "old_value",
       JProperties.getStringOptional(properties, "key", "value"));
   }
 
-  @Test public final void testGetOptionalStringMissing()
+  @Test
+  public void testGetOptionalStringMissing()
     throws JPropertyNonexistent
   {
     Assert.assertEquals(
@@ -258,60 +270,63 @@ import com.io7m.jproperties.JPropertyNonexistent;
       JProperties.getStringOptional(new Properties(), "key", "value"));
   }
 
-  @Test public final void testGetReal()
+  @Test
+  public void testGetReal()
     throws JPropertyNonexistent,
-      JPropertyIncorrectType
+    JPropertyIncorrectType
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "23.0");
     Assert.assertEquals(
       BigDecimal.valueOf(23.0),
       JProperties.getBigDecimal(properties, "key"));
   }
 
-  @Test(expected = JPropertyIncorrectType.class) public final
-    void
-    testGetRealBadType()
-      throws JPropertyNonexistent,
-        JPropertyIncorrectType
+  @Test(expected = JPropertyIncorrectType.class)
+  public void
+  testGetRealBadType()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "Z");
     Assert.assertEquals(
       BigDecimal.valueOf(23.0),
       JProperties.getBigDecimal(properties, "key"));
   }
 
-  @Test(expected = JPropertyNonexistent.class) public final
-    void
-    testGetRealMissing()
-      throws JPropertyNonexistent,
-        JPropertyIncorrectType
+  @Test(expected = JPropertyNonexistent.class)
+  public void
+  testGetRealMissing()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType
   {
     JProperties.getBigDecimal(new Properties(), "key");
   }
 
-  @Test public final void testGetString()
+  @Test
+  public void testGetString()
     throws JPropertyNonexistent
   {
-    final @Nonnull Properties properties = new Properties();
+    final Properties properties = new Properties();
     properties.put("key", "value");
     Assert
       .assertTrue("value".equals(JProperties.getString(properties, "key")));
   }
 
-  @Test(expected = JPropertyNonexistent.class) public final
-    void
-    testGetStringMissing()
-      throws JPropertyNonexistent
+  @Test(expected = JPropertyNonexistent.class)
+  public void
+  testGetStringMissing()
+    throws JPropertyNonexistent
   {
     JProperties.getString(new Properties(), "key");
   }
 
-  @SuppressWarnings("null") @Test public final void testLoad()
+  @Test
+  public void testLoad()
     throws IOException,
-      JPropertyNonexistent,
-      JPropertyIncorrectType
+    JPropertyNonexistent,
+    JPropertyIncorrectType
   {
     final File temp = File.createTempFile("JPropertiesTest", ".properties");
     final PrintWriter stream = new PrintWriter(new FileOutputStream(temp));
@@ -319,13 +334,14 @@ import com.io7m.jproperties.JPropertyNonexistent;
     stream.flush();
     stream.close();
 
-    final @Nonnull Properties properties = JProperties.fromFile(temp);
+    final Properties properties = JProperties.fromFile(temp);
     Assert.assertEquals(
       BigInteger.valueOf(23),
       JProperties.getBigInteger(properties, "integer"));
   }
 
-  @Test(expected = IOException.class) public final void testLoadNonexistent()
+  @Test(expected = IOException.class)
+  public void testLoadNonexistent()
     throws IOException
   {
     JProperties.fromFile(new File("nonexistent"));

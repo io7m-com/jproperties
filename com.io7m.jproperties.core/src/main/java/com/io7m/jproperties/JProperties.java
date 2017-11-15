@@ -87,8 +87,8 @@ public final class JProperties
     Objects.requireNonNull(properties, "Properties");
     Objects.requireNonNull(key, "Key");
 
-    final String text = JProperties.getString(properties, key);
-    return JProperties.parseReal(key, text);
+    final String text = getString(properties, key);
+    return parseReal(key, text);
   }
 
   /**
@@ -123,7 +123,7 @@ public final class JProperties
     if (text == null) {
       return other;
     }
-    return JProperties.parseReal(key, text);
+    return parseReal(key, text);
   }
 
   /**
@@ -150,8 +150,8 @@ public final class JProperties
     Objects.requireNonNull(properties, "Properties");
     Objects.requireNonNull(key, "Key");
 
-    final String text = JProperties.getString(properties, key);
-    return JProperties.parseInteger(key, text);
+    final String text = getString(properties, key);
+    return parseInteger(key, text);
   }
 
   /**
@@ -186,7 +186,7 @@ public final class JProperties
     if (text == null) {
       return other;
     }
-    return JProperties.parseInteger(key, text);
+    return parseInteger(key, text);
   }
 
   /**
@@ -214,8 +214,8 @@ public final class JProperties
     Objects.requireNonNull(properties, "Properties");
     Objects.requireNonNull(key, "Key");
 
-    final String text = JProperties.getString(properties, key);
-    return JProperties.parseBoolean(key, text);
+    final String text = getString(properties, key);
+    return parseBoolean(key, text);
   }
 
   /**
@@ -250,7 +250,7 @@ public final class JProperties
     if (text == null) {
       return other;
     }
-    return JProperties.parseBoolean(key, text);
+    return parseBoolean(key, text);
   }
 
   /**
@@ -276,7 +276,7 @@ public final class JProperties
 
     final String value = properties.getProperty(key);
     if (value == null) {
-      throw JProperties.notFound(key);
+      throw notFound(key);
     }
     return value;
   }
@@ -352,7 +352,7 @@ public final class JProperties
     if ("false".equalsIgnoreCase(text)) {
       return false;
     }
-    throw JProperties.incorrectType(key, text, "Boolean");
+    throw incorrectType(key, text, "Boolean");
   }
 
   private static BigInteger parseInteger(
@@ -363,7 +363,7 @@ public final class JProperties
     try {
       return new BigInteger(text);
     } catch (final NumberFormatException e) {
-      throw JProperties.incorrectType(key, text, "Integer");
+      throw incorrectType(key, text, "Integer");
     }
   }
 
@@ -375,7 +375,7 @@ public final class JProperties
     try {
       return new BigDecimal(text);
     } catch (final NumberFormatException e) {
-      throw JProperties.incorrectType(key, text, "Real");
+      throw incorrectType(key, text, "Real");
     }
   }
 }

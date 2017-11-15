@@ -2,7 +2,7 @@
    <c:releases>
       <c:release date="2017-11-15T00:00:00+00:00"
                  version="2.0.0"
-                 ticket-system="com.github.io7m.junreachable">
+                 ticket-system="com.github.io7m.jproperties">
          <c:changes>
             <c:change date="2017-11-15T00:00:00+00:00"
                       summary="All modules are now Java 9 modules. JDK 9 is now required."

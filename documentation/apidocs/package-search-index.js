@@ -1,0 +1,1 @@
+packageSearchIndex = [{"m":"com.io7m.jproperties.core","l":"com.io7m.jproperties"},{"m":"com.io7m.jproperties.documentation","l":"com.io7m.jproperties.documentation"}]

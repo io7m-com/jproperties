@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"com.io7m.jproperties.documentation","l":"Documentation"},{"p":"com.io7m.jproperties","l":"JProperties"},{"p":"com.io7m.jproperties","l":"JPropertyException"},{"p":"com.io7m.jproperties","l":"JPropertyIncorrectType"},{"p":"com.io7m.jproperties","l":"JPropertyNonexistent"}]

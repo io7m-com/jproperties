@@ -16,17 +16,19 @@
 
 package com.io7m.jproperties.tests;
 
-import com.io7m.jequality.annotations.EqualityReference;
-import com.io7m.jnull.NonNull;
-
-@EqualityReference public final class TestUtilities
+public final class TestUtilities
 {
   private static final Object z = null;
 
-  @SuppressWarnings({ "null", "unchecked" }) static @NonNull
-    <A>
-    A
-    actuallyNull()
+  private TestUtilities()
+  {
+
+  }
+
+  @SuppressWarnings({"unchecked"})
+  static <A>
+  A
+  actuallyNull()
   {
     return (A) TestUtilities.z;
   }

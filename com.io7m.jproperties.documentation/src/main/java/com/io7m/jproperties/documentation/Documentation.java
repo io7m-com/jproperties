@@ -16,28 +16,14 @@
 
 package com.io7m.jproperties.documentation;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-
 /**
- * Functions for retrieving the documentation.
+ * Documentation marker class.
  */
 
-public final class PDocumentation
+public final class Documentation
 {
-  public static URI getDocumentationXMLLocation()
+  private Documentation()
   {
-    try {
-      final URL url =
-        PDocumentation.class
-          .getResource("/com/io7m/jproperties/documentation/documentation.xml");
-      assert url != null;
-      final URI uri = url.toURI();
-      assert uri != null;
-      return uri;
-    } catch (final URISyntaxException e) {
-      throw new AssertionError(e);
-    }
+
   }
 }

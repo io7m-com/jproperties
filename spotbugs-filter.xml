@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter xmlns="https://github.com/spotbugs/filter/3.0.0">
+  <Match>
+    <Bug pattern="AFBR_ABNORMAL_FINALLY_BLOCK_RETURN"/>
+  </Match>
+  <Match>
+    <Class name="com.io7m.jproperties.JProperties"/>
+    <Method name="getString"/>
+    <Bug pattern="OPM_OVERLY_PERMISSIVE_METHOD"/>
+  </Match>
+</FindBugsFilter>

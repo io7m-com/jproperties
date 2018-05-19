@@ -19,10 +19,11 @@ package com.io7m.jproperties;
 import com.io7m.junreachable.UnreachableCodeException;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.file.Files;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -53,13 +54,10 @@ public final class JProperties
   {
     Objects.requireNonNull(file, "File");
 
-    final FileInputStream stream = new FileInputStream(file);
-    try {
+    try (InputStream stream = Files.newInputStream(file.toPath())) {
       final Properties p = new Properties();
       p.load(stream);
       return p;
-    } finally {
-      stream.close();
     }
   }
 
@@ -102,8 +100,6 @@ public final class JProperties
    *
    * @return The value associated with the key, parsed as an real.
    *
-   * @throws JPropertyNonexistent   If the key does not exist in the given
-   *                                properties.
    * @throws JPropertyIncorrectType If the value associated with the key cannot
    *                                be parsed as a real.
    */
@@ -112,7 +108,7 @@ public final class JProperties
     final Properties properties,
     final String key,
     final BigDecimal other)
-    throws JPropertyNonexistent,
+    throws
     JPropertyIncorrectType
   {
     Objects.requireNonNull(properties, "Properties");
@@ -165,8 +161,6 @@ public final class JProperties
    *
    * @return The value associated with the key, parsed as an integer.
    *
-   * @throws JPropertyNonexistent   If the key does not exist in the given
-   *                                properties.
    * @throws JPropertyIncorrectType If the value associated with the key cannot
    *                                be parsed as an integer.
    */
@@ -175,7 +169,7 @@ public final class JProperties
     final Properties properties,
     final String key,
     final BigInteger other)
-    throws JPropertyNonexistent,
+    throws
     JPropertyIncorrectType
   {
     Objects.requireNonNull(properties, "Properties");
@@ -230,8 +224,6 @@ public final class JProperties
    *
    * @return The value associated with the key, parsed as a boolean.
    *
-   * @throws JPropertyNonexistent   If the key does not exist in the given
-   *                                properties.
    * @throws JPropertyIncorrectType If the value associated with the key cannot
    *                                be parsed as a boolean.
    */
@@ -240,7 +232,7 @@ public final class JProperties
     final Properties properties,
     final String key,
     final boolean other)
-    throws JPropertyNonexistent,
+    throws
     JPropertyIncorrectType
   {
     Objects.requireNonNull(properties, "Properties");
@@ -291,16 +283,12 @@ public final class JProperties
    * @param key        The requested key.
    *
    * @return The value associated with the given key
-   *
-   * @throws JPropertyNonexistent If the given key is not present in the given
-   *                              properties.
    */
 
   public static String getStringOptional(
     final Properties properties,
     final String key,
     final String other)
-    throws JPropertyNonexistent
   {
     Objects.requireNonNull(properties, "Properties");
     Objects.requireNonNull(key, "Key");
@@ -314,6 +302,7 @@ public final class JProperties
   }
 
   private static JPropertyIncorrectType incorrectType(
+    final Exception cause,
     final String key,
     final String value,
     final String type)
@@ -327,7 +316,7 @@ public final class JProperties
     message.append(type);
     final String s = message.toString();
     assert s != null;
-    return new JPropertyIncorrectType(s);
+    return new JPropertyIncorrectType(s, cause);
   }
 
   private static JPropertyNonexistent notFound(
@@ -352,7 +341,7 @@ public final class JProperties
     if ("false".equalsIgnoreCase(text)) {
       return false;
     }
-    throw incorrectType(key, text, "Boolean");
+    throw incorrectType(null, key, text, "Boolean");
   }
 
   private static BigInteger parseInteger(
@@ -363,7 +352,7 @@ public final class JProperties
     try {
       return new BigInteger(text);
     } catch (final NumberFormatException e) {
-      throw incorrectType(key, text, "Integer");
+      throw incorrectType(e, key, text, "Integer");
     }
   }
 
@@ -375,7 +364,7 @@ public final class JProperties
     try {
       return new BigDecimal(text);
     } catch (final NumberFormatException e) {
-      throw incorrectType(key, text, "Real");
+      throw incorrectType(e, key, text, "Real");
     }
   }
 }

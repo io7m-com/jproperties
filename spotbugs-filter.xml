@@ -5,7 +5,9 @@
   </Match>
   <Match>
     <Class name="com.io7m.jproperties.JProperties"/>
-    <Method name="getString"/>
-    <Bug pattern="OPM_OVERLY_PERMISSIVE_METHOD"/>
+    <Or>
+      <Bug pattern="OPM_OVERLY_PERMISSIVE_METHOD"/>
+      <Bug pattern="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE"/>
+    </Or>
   </Match>
 </FindBugsFilter>

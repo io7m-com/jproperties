@@ -112,7 +112,7 @@ public final class JPropertiesTest
   {
     final Properties properties = new Properties();
     properties.put("key", "true");
-    Assert.assertTrue(true == (JProperties.getBooleanOptional(
+    Assert.assertTrue(true == (JProperties.getBooleanWithDefault(
       properties,
       "key",
       false)));
@@ -125,7 +125,7 @@ public final class JPropertiesTest
   {
     final Properties properties = new Properties();
     properties.put("key", "Z");
-    JProperties.getBooleanOptional(properties, "key", false);
+    JProperties.getBooleanWithDefault(properties, "key", false);
   }
 
   @Test
@@ -134,7 +134,7 @@ public final class JPropertiesTest
   {
     final Properties properties = new Properties();
     properties.put("key", "false");
-    Assert.assertTrue(false == (JProperties.getBooleanOptional(
+    Assert.assertTrue(false == (JProperties.getBooleanWithDefault(
       properties,
       "key",
       true)));
@@ -144,7 +144,7 @@ public final class JPropertiesTest
   public void testGetOptionalBooleanMissing()
     throws Exception
   {
-    Assert.assertTrue(true == (JProperties.getBooleanOptional(
+    Assert.assertTrue(true == (JProperties.getBooleanWithDefault(
       new Properties(),
       "key",
       true)));
@@ -159,7 +159,7 @@ public final class JPropertiesTest
     properties.put("key", "23");
     Assert.assertEquals(
       BigInteger.valueOf(23),
-      JProperties.getBigIntegerOptional(
+      JProperties.getBigIntegerWithDefault(
         properties,
         "key",
         BigInteger.valueOf(47)));
@@ -173,7 +173,7 @@ public final class JPropertiesTest
   {
     final Properties properties = new Properties();
     properties.put("key", "Z");
-    JProperties.getBigIntegerOptional(
+    JProperties.getBigIntegerWithDefault(
       properties,
       "key",
       BigInteger.valueOf(47));
@@ -186,7 +186,7 @@ public final class JPropertiesTest
   {
     Assert.assertEquals(
       BigInteger.valueOf(47),
-      JProperties.getBigIntegerOptional(
+      JProperties.getBigIntegerWithDefault(
         new Properties(),
         "key",
         BigInteger.valueOf(47)));
@@ -201,7 +201,7 @@ public final class JPropertiesTest
     properties.put("key", "23.0");
     Assert.assertEquals(
       new BigDecimal("23.0"),
-      JProperties.getBigDecimalOptional(
+      JProperties.getBigDecimalWithDefault(
         properties,
         "key",
         BigDecimal.valueOf(47)));
@@ -215,7 +215,7 @@ public final class JPropertiesTest
   {
     final Properties properties = new Properties();
     properties.put("key", "Z");
-    JProperties.getBigDecimalOptional(
+    JProperties.getBigDecimalWithDefault(
       properties,
       "key",
       BigDecimal.valueOf(23));
@@ -229,7 +229,7 @@ public final class JPropertiesTest
   {
     Assert.assertEquals(
       BigDecimal.valueOf(23.0),
-      JProperties.getBigDecimalOptional(
+      JProperties.getBigDecimalWithDefault(
         new Properties(),
         "key",
         BigDecimal.valueOf(23.0)));
@@ -243,7 +243,7 @@ public final class JPropertiesTest
     properties.put("key", "old_value");
     Assert.assertEquals(
       "old_value",
-      JProperties.getStringOptional(properties, "key", "value"));
+      JProperties.getStringWithDefault(properties, "key", "value"));
   }
 
   @Test
@@ -252,7 +252,7 @@ public final class JPropertiesTest
   {
     Assert.assertEquals(
       "value",
-      JProperties.getStringOptional(new Properties(), "key", "value"));
+      JProperties.getStringWithDefault(new Properties(), "key", "value"));
   }
 
   @Test

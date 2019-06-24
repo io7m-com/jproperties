@@ -20,10 +20,14 @@
   <modules>
     <module>com.io7m.jproperties.core</module>
     <module>com.io7m.jproperties.documentation</module>
+    <module>com.io7m.jproperties.monad</module>
+    <module>com.io7m.jproperties.tests</module>
   </modules>
 
   <properties>
     <io7m.api.previousVersion>2.0.0</io7m.api.previousVersion>
+    <io7m.org.immutables.version>2.7.5</io7m.org.immutables.version>
+    <io7m.immutables.style.version>0.0.1</io7m.immutables.style.version>
   </properties>
 
   <licenses>
@@ -83,6 +87,17 @@
       </dependency>
 
       <dependency>
+        <groupId>com.io7m.immutables.style</groupId>
+        <artifactId>com.io7m.immutables.style</artifactId>
+        <version>${io7m.immutables.style.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.immutables</groupId>
+        <artifactId>value</artifactId>
+        <version>${io7m.org.immutables.version}</version>
+      </dependency>
+
+      <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.12</version>
@@ -93,14 +108,23 @@
   <build>
     <pluginManagement>
       <plugins>
-        <!-- Require JDK >= 11 -->
+        <!-- Configure compiler -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <configuration>
-            <source>11</source>
-            <target>11</target>
-            <release>11</release>
+            <annotationProcessorPaths>
+              <dependency>
+                <groupId>com.io7m.immutables.style</groupId>
+                <artifactId>com.io7m.immutables.style</artifactId>
+                <version>${io7m.immutables.style.version}</version>
+              </dependency>
+              <dependency>
+                <groupId>org.immutables</groupId>
+                <artifactId>value</artifactId>
+                <version>${io7m.org.immutables.version}</version>
+              </dependency>
+            </annotationProcessorPaths>
           </configuration>
         </plugin>
 

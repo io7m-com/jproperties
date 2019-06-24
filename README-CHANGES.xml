@@ -29,9 +29,15 @@
         <c:change compatible="false" date="2017-11-15T00:00:00+00:00" summary="Removed dependency on com.io7m.jnull."/>
       </c:changes>
     </c:release>
-    <c:release date="2019-06-24T10:14:46+00:00" ticket-system="com.github.io7m.jproperties" version="3.0.0">
+    <c:release date="2019-06-24T11:38:28+00:00" ticket-system="com.github.io7m.jproperties" version="3.0.0">
       <c:changes>
-        <c:change compatible="false" date="2019-06-24T10:14:46+00:00" summary="Require JDK 11"/>
+        <c:change compatible="false" date="2019-06-24T00:00:00+00:00" summary="Require JDK 11"/>
+        <c:change compatible="false" date="2019-06-24T00:00:00+00:00" summary="Renamed &quot;optional&quot; methods to &quot;withDefault&quot; to make way for Optional-typed methods"/>
+        <c:change date="2019-06-24T11:38:28+00:00" summary="Add Monad module">
+          <c:tickets>
+            <c:ticket id="2"/>
+          </c:tickets>
+        </c:change>
       </c:changes>
     </c:release>
   </c:releases>

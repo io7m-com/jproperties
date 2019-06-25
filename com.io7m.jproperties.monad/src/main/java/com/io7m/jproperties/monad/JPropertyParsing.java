@@ -120,6 +120,11 @@ public final class JPropertyParsing
     final String format,
     final ParseFunctionType<T> parser)
   {
+    Objects.requireNonNull(properties, "properties");
+    Objects.requireNonNull(key, "key");
+    Objects.requireNonNull(format, "format");
+    Objects.requireNonNull(parser, "parser");
+
     return parseString(properties, key)
       .flatMap(text -> parseFromText(key, text, format, s -> parser.parse(key, s)));
   }
@@ -145,6 +150,11 @@ public final class JPropertyParsing
     final String format,
     final ParseFunctionType<T> parser)
   {
+    Objects.requireNonNull(properties, "properties");
+    Objects.requireNonNull(key, "key");
+    Objects.requireNonNull(format, "format");
+    Objects.requireNonNull(parser, "parser");
+
     return parseStringOptional(properties, key).flatMap(option -> {
       if (option.isPresent()) {
         return parseFromText(key, option.get(), format, ignored -> parser.parse(key, ignored))
@@ -177,6 +187,11 @@ public final class JPropertyParsing
     final T defaultValue,
     final ParseFunctionType<T> parser)
   {
+    Objects.requireNonNull(properties, "properties");
+    Objects.requireNonNull(key, "key");
+    Objects.requireNonNull(format, "format");
+    Objects.requireNonNull(parser, "parser");
+
     return parseAnyOptional(properties, key, format, parser)
       .flatMap(option -> successOf(option.orElse(defaultValue)));
   }
@@ -273,6 +288,9 @@ public final class JPropertyParsing
     final Properties properties,
     final String key)
   {
+    Objects.requireNonNull(properties, "properties");
+    Objects.requireNonNull(key, "key");
+
     return parseT(() -> JProperties.getString(properties, key));
   }
 
@@ -289,6 +307,9 @@ public final class JPropertyParsing
     final Properties properties,
     final String key)
   {
+    Objects.requireNonNull(properties, "properties");
+    Objects.requireNonNull(key, "key");
+
     return parseT(() -> JProperties.getStringOptional(properties, key));
   }
 
@@ -307,6 +328,9 @@ public final class JPropertyParsing
     final String key,
     final String defaultValue)
   {
+    Objects.requireNonNull(properties, "properties");
+    Objects.requireNonNull(key, "key");
+
     return parseT(() -> JProperties.getStringWithDefault(properties, key, defaultValue));
   }
 
@@ -561,6 +585,7 @@ public final class JPropertyParsing
   {
     Objects.requireNonNull(key, "key");
     Objects.requireNonNull(message, "message");
+
     return JPropertySuccess.<Unit>builder()
       .addWarnings(JPropertyWarning.of(
         new StringBuilder(128)
@@ -584,6 +609,8 @@ public final class JPropertyParsing
   public static JPropertyParseMonadType<Unit> fail(
     final Exception e)
   {
+    Objects.requireNonNull(e, "exception");
+
     return JPropertyFailure.<Unit>builder()
       .addErrors(JPropertyError.of(e.getMessage()))
       .setException(e)

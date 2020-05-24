@@ -17,6 +17,10 @@
   <description>Typed property handling (Monad)</description>
   <url>http://io7m.github.io/jproperties/</url>
 
+  <properties>
+    <io7m.api.previousVersion>3.0.0-SNAPSHOT</io7m.api.previousVersion>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>

@@ -8,10 +8,6 @@
          <img src="https://img.shields.io/maven-central/v/com.io7m.jproperties/com.io7m.jproperties.png?style=flat-square"
               alt="Maven Central"/>
       </a>
-      <a href="https://www.codacy.com/app/github_79/jproperties">
-         <img src="https://img.shields.io/codacy/grade/c9ee639f0d5d47b0ae56e8c2b1a233a8.png?style=flat-square"
-              alt="Codacy"/>
-      </a>
       <a href="https://codecov.io/gh/io7m/jproperties">
          <img src="https://img.shields.io/codecov/c/github/io7m/jproperties.png?style=flat-square"
               alt="Codecov"/>

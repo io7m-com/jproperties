@@ -158,6 +158,12 @@ public interface JPropertyParseMonadType<A>
     String message();
   }
 
+  /**
+   * A result indicating success.
+   *
+   * @param <A> The type of result values
+   */
+
   @ImmutablesStyleType
   @Value.Immutable
   interface JPropertySuccessType<A> extends JPropertyParseMonadType<A>
@@ -216,6 +222,12 @@ public interface JPropertyParseMonadType<A>
         .build();
     }
   }
+
+  /**
+   * A result indicating failure.
+   *
+   * @param <A> The type of result values
+   */
 
   @ImmutablesStyleType
   @Value.Immutable

@@ -29,7 +29,7 @@
         <c:change compatible="false" date="2017-11-15T00:00:00+00:00" summary="Removed dependency on com.io7m.jnull."/>
       </c:changes>
     </c:release>
-    <c:release date="2021-05-28T10:02:35+00:00" is-open="true" ticket-system="com.github.io7m.jproperties" version="3.0.0">
+    <c:release date="2021-05-28T12:39:22+00:00" is-open="true" ticket-system="com.github.io7m.jproperties" version="3.0.0">
       <c:changes>
         <c:change compatible="false" date="2019-06-24T00:00:00+00:00" summary="Require JDK 11"/>
         <c:change compatible="false" date="2019-06-24T00:00:00+00:00" summary="Renamed &quot;optional&quot; methods to &quot;withDefault&quot; to make way for Optional-typed methods"/>
@@ -38,7 +38,8 @@
             <c:ticket id="2"/>
           </c:tickets>
         </c:change>
-        <c:change date="2021-05-28T10:02:35+00:00" summary="Added int, long, double methods"/>
+        <c:change date="2021-05-28T00:00:00+00:00" summary="Added int, long, double methods"/>
+        <c:change date="2021-05-28T12:39:22+00:00" summary="Add functions to parse URI, UUID, InetAddress values"/>
       </c:changes>
     </c:release>
   </c:releases>

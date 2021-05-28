@@ -22,10 +22,15 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.InetAddress;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.UUID;
 
 /**
  * Type-safe interface to {@link java.util.Properties}.
@@ -463,7 +468,7 @@ public final class JProperties
    * @param properties The loaded properties.
    * @param key        The requested key.
    *
-   * @return The value associated with the key, parsed as an integer.
+   * @return The value associated with the key, parsed a double
    *
    * @throws JPropertyNonexistent   If the key does not exist in the given properties.
    * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as an
@@ -491,7 +496,7 @@ public final class JProperties
    * @param properties The loaded properties.
    * @param key        The requested key.
    *
-   * @return The value associated with the key, parsed as an integer.
+   * @return The value associated with the key, parsed as a double
    *
    * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as an
    *                                integer.
@@ -512,6 +517,204 @@ public final class JProperties
       return other;
     }
     return parseReal(key, text).doubleValue();
+  }
+
+  /**
+   * <p> Returns the URI value associated with {@code key} in the
+   * properties referenced by {@code properties}. </p>
+   *
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as a URI.
+   *
+   * @throws JPropertyNonexistent   If the key does not exist in the given properties.
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as a
+   *                                URI.
+   */
+
+  public static URI getURI(
+    final Properties properties,
+    final String key)
+    throws JPropertyNonexistent, JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = getString(properties, key);
+    try {
+      return new URI(text);
+    } catch (final URISyntaxException e) {
+      throw incorrectType(e, key, text, "URI");
+    }
+  }
+
+  /**
+   * <p> Returns the URI value associated with {@code key} in the
+   * properties referenced by {@code properties} if it exists, otherwise returns {@code other}.
+   * </p>
+   *
+   * @param other      The default value
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as a URI.
+   *
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as a
+   *                                URI.
+   * @since 3.0.0
+   */
+
+  public static URI getURIWithDefault(
+    final Properties properties,
+    final String key,
+    final URI other)
+    throws JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = properties.getProperty(key);
+    if (text == null) {
+      return other;
+    }
+    try {
+      return new URI(text);
+    } catch (final URISyntaxException e) {
+      throw incorrectType(e, key, text, "URI");
+    }
+  }
+
+  /**
+   * <p> Returns the UUID value associated with {@code key} in the
+   * properties referenced by {@code properties}. </p>
+   *
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as a UUID.
+   *
+   * @throws JPropertyNonexistent   If the key does not exist in the given properties.
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as a
+   *                                UUID.
+   */
+
+  public static UUID getUUID(
+    final Properties properties,
+    final String key)
+    throws JPropertyNonexistent, JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = getString(properties, key);
+    try {
+      return UUID.fromString(text);
+    } catch (final IllegalArgumentException e) {
+      throw incorrectType(e, key, text, "UUID");
+    }
+  }
+
+  /**
+   * <p> Returns the UUID value associated with {@code key} in the
+   * properties referenced by {@code properties} if it exists, otherwise returns {@code other}.
+   * </p>
+   *
+   * @param other      The default value
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as a UUID.
+   *
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as a
+   *                                UUID.
+   * @since 3.0.0
+   */
+
+  public static UUID getUUIDWithDefault(
+    final Properties properties,
+    final String key,
+    final UUID other)
+    throws JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = properties.getProperty(key);
+    if (text == null) {
+      return other;
+    }
+    try {
+      return UUID.fromString(text);
+    } catch (final IllegalArgumentException e) {
+      throw incorrectType(e, key, text, "UUID");
+    }
+  }
+
+  /**
+   * <p> Returns the InetAddress value associated with {@code key} in the
+   * properties referenced by {@code properties}. </p>
+   *
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as an InetAddress.
+   *
+   * @throws JPropertyNonexistent   If the key does not exist in the given properties.
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as a
+   *                                InetAddress.
+   */
+
+  public static InetAddress getInetAddress(
+    final Properties properties,
+    final String key)
+    throws JPropertyNonexistent, JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = getString(properties, key);
+    try {
+      return InetAddress.getByName(text);
+    } catch (final UnknownHostException e) {
+      throw incorrectType(e, key, text, "InetAddress");
+    }
+  }
+
+  /**
+   * <p> Returns the InetAddress value associated with {@code key} in the
+   * properties referenced by {@code properties} if it exists, otherwise returns {@code other}.
+   * </p>
+   *
+   * @param other      The default value
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as an InetAddress.
+   *
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as a
+   *                                InetAddress.
+   * @since 3.0.0
+   */
+
+  public static InetAddress getInetAddressWithDefault(
+    final Properties properties,
+    final String key,
+    final InetAddress other)
+    throws JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = properties.getProperty(key);
+    if (text == null) {
+      return other;
+    }
+    try {
+      return InetAddress.getByName(text);
+    } catch (final UnknownHostException e) {
+      throw incorrectType(e, key, text, "InetAddress");
+    }
   }
 
   private static JPropertyIncorrectType incorrectType(

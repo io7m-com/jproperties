@@ -29,7 +29,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.InetAddress;
+import java.net.URI;
+import java.net.UnknownHostException;
 import java.util.Properties;
+import java.util.UUID;
 
 /**
  * Tests to ensure the property interface is working correctly.
@@ -49,7 +53,9 @@ public final class JPropertiesTest
       cons.newInstance();
       Assert.fail();
     } catch (final Exception e) {
-      Assert.assertEquals(UnreachableCodeException.class, e.getCause().getClass());
+      Assert.assertEquals(
+        UnreachableCodeException.class,
+        e.getCause().getClass());
     }
   }
 
@@ -589,5 +595,209 @@ public final class JPropertiesTest
         "key",
         Double.valueOf(47.0)),
       0.0);
+  }
+
+  @Test
+  public void testGetURI()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "23");
+    Assert.assertEquals(
+      URI.create("23"),
+      JProperties.getURI(properties, "key"));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetURIBadType()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType
+  {
+    final var properties = new Properties();
+    properties.put("key", "not a uri");
+    Assert.assertEquals(
+      URI.create("23"),
+      JProperties.getURI(properties, "key"));
+  }
+
+  @Test(expected = JPropertyNonexistent.class)
+  public void testGetURIMissing()
+    throws Exception
+  {
+    JProperties.getURI(new Properties(), "key");
+  }
+
+  @Test
+  public void testGetOptionalURI()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "23");
+    Assert.assertEquals(
+      URI.create("23"),
+      JProperties.getURIWithDefault(
+        properties,
+        "key",
+        URI.create("23")));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetOptionalURIBadType()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "not a uri");
+    JProperties.getURIWithDefault(
+      properties,
+      "key",
+      URI.create("23"));
+  }
+
+  @Test
+  public void testGetOptionalURIMissing()
+    throws Exception
+  {
+    Assert.assertEquals(
+      URI.create("47"),
+      JProperties.getURIWithDefault(
+        new Properties(),
+        "key",
+        URI.create("47")));
+  }
+
+  @Test
+  public void testGetUUID()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "4b73d18a-508a-4a2f-934b-c36a7da42ed6");
+    Assert.assertEquals(
+      UUID.fromString("4b73d18a-508a-4a2f-934b-c36a7da42ed6"),
+      JProperties.getUUID(properties, "key"));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetUUIDBadType()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType
+  {
+    final var properties = new Properties();
+    properties.put("key", "not a uuid");
+    Assert.assertEquals(
+      UUID.fromString("4b73d18a-508a-4a2f-934b-c36a7da42ed6"),
+      JProperties.getUUID(properties, "key"));
+  }
+
+  @Test(expected = JPropertyNonexistent.class)
+  public void testGetUUIDMissing()
+    throws Exception
+  {
+    JProperties.getUUID(new Properties(), "key");
+  }
+
+  @Test
+  public void testGetOptionalUUID()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "4b73d18a-508a-4a2f-934b-c36a7da42ed6");
+    Assert.assertEquals(
+      UUID.fromString("4b73d18a-508a-4a2f-934b-c36a7da42ed6"),
+      JProperties.getUUIDWithDefault(
+        properties,
+        "key",
+        UUID.fromString("4b73d18a-508a-4a2f-934b-c36a7da42ed6")));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetOptionalUUIDBadType()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "not a uuid");
+    JProperties.getUUIDWithDefault(
+      properties,
+      "key",
+      UUID.fromString("4b73d18a-508a-4a2f-934b-c36a7da42ed6"));
+  }
+
+  @Test
+  public void testGetOptionalUUIDMissing()
+    throws Exception
+  {
+    Assert.assertEquals(
+      UUID.fromString("4b73d18a-508a-4a2f-934b-c36a7da42ed6"),
+      JProperties.getUUIDWithDefault(
+        new Properties(),
+        "key",
+        UUID.fromString("4b73d18a-508a-4a2f-934b-c36a7da42ed6")));
+  }
+
+  @Test
+  public void testGetInetAddress()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "localhost");
+    Assert.assertEquals(
+      InetAddress.getByName("localhost"),
+      JProperties.getInetAddress(properties, "key"));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetInetAddressBadType()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType, UnknownHostException
+  {
+    final var properties = new Properties();
+    properties.put("key", "not a uuid");
+    Assert.assertEquals(
+      InetAddress.getByName("localhost"),
+      JProperties.getInetAddress(properties, "key"));
+  }
+
+  @Test(expected = JPropertyNonexistent.class)
+  public void testGetInetAddressMissing()
+    throws Exception
+  {
+    JProperties.getInetAddress(new Properties(), "key");
+  }
+
+  @Test
+  public void testGetOptionalInetAddress()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "localhost");
+    Assert.assertEquals(
+      InetAddress.getByName("localhost"),
+      JProperties.getInetAddressWithDefault(
+        properties,
+        "key",
+        InetAddress.getByName("localhost")));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetOptionalInetAddressBadType()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "not a uuid");
+    JProperties.getInetAddressWithDefault(
+      properties,
+      "key",
+      InetAddress.getByName("localhost"));
+  }
+
+  @Test
+  public void testGetOptionalInetAddressMissing()
+    throws Exception
+  {
+    Assert.assertEquals(
+      InetAddress.getByName("localhost"),
+      JProperties.getInetAddressWithDefault(
+        new Properties(),
+        "key",
+        InetAddress.getByName("localhost")));
   }
 }

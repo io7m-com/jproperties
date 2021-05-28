@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2019 Mark Raynsford <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,32 +14,8 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jproperties;
-
 /**
- * <p> The type of exceptions raised upon accessing a property that is not of
- * the expected type. </p>
+ * Property parsing monad.
  */
 
-public final class JPropertyIncorrectType extends JPropertyException
-{
-  private static final long serialVersionUID;
-
-  static {
-    serialVersionUID = -6149310151946690316L;
-  }
-
-  /**
-   * Construct an exception with the given message and cause.
-   *
-   * @param cause   The cause
-   * @param message The message
-   */
-
-  public JPropertyIncorrectType(
-    final String message,
-    final Throwable cause)
-  {
-    super(message, cause);
-  }
-}
+package com.io7m.jproperties.monad;

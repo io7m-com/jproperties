@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>com.io7m.primogenitor</groupId>
-    <artifactId>com.io7m.primogenitor</artifactId>
-    <version>2.0.0</version>
+    <artifactId>com.io7m.primogenitor.full</artifactId>
+    <version>6.4.2</version>
   </parent>
 
   <groupId>com.io7m.jproperties</groupId>
   <artifactId>com.io7m.jproperties</artifactId>
-  <version>2.0.0</version>
+  <version>3.0.0</version>
 
   <packaging>pom</packaging>
   <name>com.io7m.jproperties</name>
@@ -21,15 +22,16 @@
   <url>http://github.com/io7m/jproperties</url>
 
   <modules>
-    <module>com.io7m.jproperties.checkstyle</module>
     <module>com.io7m.jproperties.core</module>
     <module>com.io7m.jproperties.documentation</module>
+    <module>com.io7m.jproperties.monad</module>
+    <module>com.io7m.jproperties.tests</module>
   </modules>
 
   <properties>
-    <io7m.checkstyle.artifact>com.io7m.jproperties.checkstyle</io7m.checkstyle.artifact>
-    <io7m.checkstyle.path>/com/io7m/jproperties/checkstyle/checkstyle.xml</io7m.checkstyle.path>
-    <io7m.api.previousVersion>1.0.2</io7m.api.previousVersion>
+    <io7m.api.previousVersion>2.0.0</io7m.api.previousVersion>
+    <io7m.org.immutables.version>2.7.5</io7m.org.immutables.version>
+    <io7m.immutables.style.version>0.0.1</io7m.immutables.style.version>
   </properties>
 
   <licenses>
@@ -61,9 +63,9 @@
 
   <distributionManagement>
     <site>
-      <id>GitHub</id>
-      <name>GitHub</name>
-      <url>http://io7m.github.io/jproperties</url>
+      <id>io7m.com</id>
+      <name>io7m.com</name>
+      <url>https://www.io7m.com/software/jproperties</url>
     </site>
     <repository>
       <id>sonatype-nexus-staging</id>
@@ -72,8 +74,8 @@
   </distributionManagement>
 
   <ciManagement>
-    <system>Travis CI</system>
-    <url>https://travis-ci.org/io7m/jproperties</url>
+    <system>GitHub Actions</system>
+    <url>https://github.com/jproperties/actions</url>
   </ciManagement>
 
   <prerequisites>
@@ -85,13 +87,29 @@
       <dependency>
         <groupId>com.io7m.junreachable</groupId>
         <artifactId>com.io7m.junreachable.core</artifactId>
-        <version>2.0.0</version>
+        <version>3.0.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.io7m.immutables.style</groupId>
+        <artifactId>com.io7m.immutables.style</artifactId>
+        <version>${io7m.immutables.style.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.immutables</groupId>
+        <artifactId>value</artifactId>
+        <version>${io7m.org.immutables.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.io7m.primogenitor</groupId>
+        <artifactId>com.io7m.primogenitor.support</artifactId>
+        <version>6.4.2</version>
       </dependency>
 
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.12</version>
+        <version>4.13.2</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -99,14 +117,23 @@
   <build>
     <pluginManagement>
       <plugins>
-        <!-- Require JDK >= 9 -->
+        <!-- Configure compiler -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <configuration>
-            <source>9</source>
-            <target>9</target>
-            <release>9</release>
+            <annotationProcessorPaths>
+              <dependency>
+                <groupId>com.io7m.immutables.style</groupId>
+                <artifactId>com.io7m.immutables.style</artifactId>
+                <version>${io7m.immutables.style.version}</version>
+              </dependency>
+              <dependency>
+                <groupId>org.immutables</groupId>
+                <artifactId>value</artifactId>
+                <version>${io7m.org.immutables.version}</version>
+              </dependency>
+            </annotationProcessorPaths>
           </configuration>
         </plugin>
 
@@ -115,6 +142,15 @@
           <groupId>com.io7m.jstructural</groupId>
           <artifactId>io7m-jstructural-maven-plugin</artifactId>
           <version>5.0.0</version>
+        </plugin>
+
+        <!-- Spot bugs -->
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <configuration>
+            <excludeFilterFile>spotbugs-filter.xml</excludeFilterFile>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>

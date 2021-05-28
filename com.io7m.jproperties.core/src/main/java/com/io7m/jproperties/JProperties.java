@@ -324,6 +324,196 @@ public final class JProperties
     return value;
   }
 
+  /**
+   * <p> Returns the integer value associated with {@code key} in the
+   * properties referenced by {@code properties}. </p>
+   *
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as an integer.
+   *
+   * @throws JPropertyNonexistent   If the key does not exist in the given properties.
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as an
+   *                                integer.
+   */
+
+  public static int getInteger(
+    final Properties properties,
+    final String key)
+    throws JPropertyNonexistent, JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = getString(properties, key);
+    try {
+      return parseInteger(key, text).intValueExact();
+    } catch (final ArithmeticException e) {
+      throw incorrectType(e, key, text, "int");
+    }
+  }
+
+  /**
+   * <p> Returns the integer value associated with {@code key} in the
+   * properties referenced by {@code properties} if it exists, otherwise returns {@code other}.
+   * </p>
+   *
+   * @param other      The default value
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as an integer.
+   *
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as an
+   *                                integer.
+   * @since 3.0.0
+   */
+
+  public static int getIntegerWithDefault(
+    final Properties properties,
+    final String key,
+    final int other)
+    throws JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = properties.getProperty(key);
+    if (text == null) {
+      return other;
+    }
+    try {
+      return parseInteger(key, text).intValueExact();
+    } catch (final ArithmeticException e) {
+      throw incorrectType(e, key, text, "int");
+    }
+  }
+
+  /**
+   * <p> Returns the integer value associated with {@code key} in the
+   * properties referenced by {@code properties}. </p>
+   *
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as an integer.
+   *
+   * @throws JPropertyNonexistent   If the key does not exist in the given properties.
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as an
+   *                                integer.
+   */
+
+  public static long getLong(
+    final Properties properties,
+    final String key)
+    throws JPropertyNonexistent, JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = getString(properties, key);
+    try {
+      return parseInteger(key, text).longValueExact();
+    } catch (final ArithmeticException e) {
+      throw incorrectType(e, key, text, "long");
+    }
+  }
+
+  /**
+   * <p> Returns the integer value associated with {@code key} in the
+   * properties referenced by {@code properties} if it exists, otherwise returns {@code other}.
+   * </p>
+   *
+   * @param other      The default value
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as an integer.
+   *
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as an
+   *                                integer.
+   * @since 3.0.0
+   */
+
+  public static long getLongWithDefault(
+    final Properties properties,
+    final String key,
+    final long other)
+    throws JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = properties.getProperty(key);
+    if (text == null) {
+      return other;
+    }
+    try {
+      return parseInteger(key, text).longValueExact();
+    } catch (final ArithmeticException e) {
+      throw incorrectType(e, key, text, "long");
+    }
+  }
+
+  /**
+   * <p> Returns the integer value associated with {@code key} in the
+   * properties referenced by {@code properties}. </p>
+   *
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as an integer.
+   *
+   * @throws JPropertyNonexistent   If the key does not exist in the given properties.
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as an
+   *                                integer.
+   */
+
+  public static double getDouble(
+    final Properties properties,
+    final String key)
+    throws JPropertyNonexistent, JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = getString(properties, key);
+    return parseReal(key, text).doubleValue();
+  }
+
+  /**
+   * <p> Returns the integer value associated with {@code key} in the
+   * properties referenced by {@code properties} if it exists, otherwise returns {@code other}.
+   * </p>
+   *
+   * @param other      The default value
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as an integer.
+   *
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as an
+   *                                integer.
+   * @since 3.0.0
+   */
+
+  public static double getDoubleWithDefault(
+    final Properties properties,
+    final String key,
+    final double other)
+    throws JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = properties.getProperty(key);
+    if (text == null) {
+      return other;
+    }
+    return parseReal(key, text).doubleValue();
+  }
+
   private static JPropertyIncorrectType incorrectType(
     final Exception cause,
     final String key,

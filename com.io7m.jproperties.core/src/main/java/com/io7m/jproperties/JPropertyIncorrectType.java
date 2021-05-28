@@ -42,16 +42,4 @@ public final class JPropertyIncorrectType extends JPropertyException
   {
     super(message, cause);
   }
-
-  /**
-   * Construct an exception with the given message.
-   *
-   * @param message The message
-   */
-
-  public JPropertyIncorrectType(
-    final String message)
-  {
-    super(message);
-  }
 }

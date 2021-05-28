@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -19,6 +19,7 @@ package com.io7m.jproperties.tests;
 import com.io7m.jproperties.JProperties;
 import com.io7m.jproperties.JPropertyIncorrectType;
 import com.io7m.jproperties.JPropertyNonexistent;
+import com.io7m.junreachable.UnreachableCodeException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,11 +38,27 @@ import java.util.Properties;
 public final class JPropertiesTest
 {
   @Test
+  public void testUnreachable()
+    throws Exception
+  {
+    final var cons =
+      JProperties.class.getDeclaredConstructor();
+    cons.setAccessible(true);
+
+    try {
+      cons.newInstance();
+      Assert.fail();
+    } catch (final Exception e) {
+      Assert.assertEquals(UnreachableCodeException.class, e.getCause().getClass());
+    }
+  }
+
+  @Test
   public void testGetBoolean()
     throws JPropertyNonexistent,
     JPropertyIncorrectType
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "true");
     Assert.assertTrue(true == (JProperties.getBoolean(properties, "key")));
   }
@@ -51,7 +68,7 @@ public final class JPropertiesTest
   testGetBooleanBadType()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "Z");
     Assert.assertTrue(false == (JProperties.getBoolean(properties, "key")));
   }
@@ -61,7 +78,7 @@ public final class JPropertiesTest
     throws JPropertyNonexistent,
     JPropertyIncorrectType
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "false");
     Assert.assertTrue(false == (JProperties.getBoolean(properties, "key")));
   }
@@ -78,7 +95,7 @@ public final class JPropertiesTest
   public void testGetInteger()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "23");
     Assert.assertEquals(
       BigInteger.valueOf(23),
@@ -91,7 +108,7 @@ public final class JPropertiesTest
     throws JPropertyNonexistent,
     JPropertyIncorrectType
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "Z");
     Assert.assertEquals(
       BigInteger.valueOf(23),
@@ -110,7 +127,7 @@ public final class JPropertiesTest
   public void testGetOptionalBoolean()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "true");
     Assert.assertTrue(true == (JProperties.getBooleanWithDefault(
       properties,
@@ -123,7 +140,7 @@ public final class JPropertiesTest
   testGetOptionalBooleanBadType()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "Z");
     JProperties.getBooleanWithDefault(properties, "key", false);
   }
@@ -132,7 +149,7 @@ public final class JPropertiesTest
   public void testGetOptionalBooleanFalse()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "false");
     Assert.assertTrue(false == (JProperties.getBooleanWithDefault(
       properties,
@@ -150,12 +167,11 @@ public final class JPropertiesTest
       true)));
   }
 
-
   @Test
   public void testGetOptionalInteger()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "23");
     Assert.assertEquals(
       BigInteger.valueOf(23),
@@ -165,13 +181,12 @@ public final class JPropertiesTest
         BigInteger.valueOf(47)));
   }
 
-
   @Test(expected = JPropertyIncorrectType.class)
   public void
   testGetOptionalIntegerBadType()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "Z");
     JProperties.getBigIntegerWithDefault(
       properties,
@@ -197,7 +212,7 @@ public final class JPropertiesTest
   public void testGetOptionalReal()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "23.0");
     Assert.assertEquals(
       new BigDecimal("23.0"),
@@ -213,14 +228,13 @@ public final class JPropertiesTest
   testGetOptionalRealBadType()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "Z");
     JProperties.getBigDecimalWithDefault(
       properties,
       "key",
       BigDecimal.valueOf(23));
   }
-
 
   @Test
   public void
@@ -239,7 +253,7 @@ public final class JPropertiesTest
   public void testGetOptionalString()
     throws JPropertyNonexistent
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "old_value");
     Assert.assertEquals(
       "old_value",
@@ -259,7 +273,7 @@ public final class JPropertiesTest
   public void testGetReal()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "23.0");
     Assert.assertEquals(
       BigDecimal.valueOf(23.0),
@@ -271,7 +285,7 @@ public final class JPropertiesTest
   testGetRealBadType()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "Z");
     Assert.assertEquals(
       BigDecimal.valueOf(23.0),
@@ -290,7 +304,7 @@ public final class JPropertiesTest
   public void testGetString()
     throws Exception
   {
-    final Properties properties = new Properties();
+    final var properties = new Properties();
     properties.put("key", "value");
     Assert
       .assertTrue("value".equals(JProperties.getString(properties, "key")));
@@ -308,13 +322,13 @@ public final class JPropertiesTest
   public void testLoad()
     throws Exception
   {
-    final File temp = File.createTempFile("JPropertiesTest", ".properties");
-    final PrintWriter stream = new PrintWriter(new FileOutputStream(temp));
+    final var temp = File.createTempFile("JPropertiesTest", ".properties");
+    final var stream = new PrintWriter(new FileOutputStream(temp));
     stream.write("integer = 23");
     stream.flush();
     stream.close();
 
-    final Properties properties = JProperties.fromFile(temp);
+    final var properties = JProperties.fromFile(temp);
     Assert.assertEquals(
       BigInteger.valueOf(23),
       JProperties.getBigInteger(properties, "integer"));
@@ -325,5 +339,255 @@ public final class JPropertiesTest
     throws IOException
   {
     JProperties.fromFile(new File("nonexistent"));
+  }
+
+  @Test
+  public void testGetInt()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "23");
+    Assert.assertEquals(
+      23,
+      JProperties.getInteger(properties, "key"));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetIntOutOfRange()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "232323232323232323");
+    JProperties.getInteger(properties, "key");
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetIntBadType()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType
+  {
+    final var properties = new Properties();
+    properties.put("key", "Z");
+    Assert.assertEquals(
+      23,
+      JProperties.getInteger(properties, "key"));
+  }
+
+  @Test(expected = JPropertyNonexistent.class)
+  public void testGetIntMissing()
+    throws Exception
+  {
+    JProperties.getInteger(new Properties(), "key");
+  }
+
+  @Test
+  public void testGetLong()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "23");
+    Assert.assertEquals(
+      23,
+      JProperties.getLong(properties, "key"));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetLongOutOfRange()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "232323232323232323232323232323232323232323");
+    JProperties.getLong(properties, "key");
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetLongBadType()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType
+  {
+    final var properties = new Properties();
+    properties.put("key", "Z");
+    Assert.assertEquals(
+      23,
+      JProperties.getLong(properties, "key"));
+  }
+
+  @Test(expected = JPropertyNonexistent.class)
+  public void testGetLongMissing()
+    throws Exception
+  {
+    JProperties.getLong(new Properties(), "key");
+  }
+
+
+  @Test
+  public void testGetDouble()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "23.0");
+    Assert.assertEquals(
+      23.0,
+      JProperties.getDouble(properties, "key"),
+      0.0);
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetDoubleBadType()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType
+  {
+    final var properties = new Properties();
+    properties.put("key", "Z");
+    Assert.assertEquals(
+      23.0,
+      JProperties.getDouble(properties, "key"));
+  }
+
+  @Test(expected = JPropertyNonexistent.class)
+  public void testGetDoubleMissing()
+    throws Exception
+  {
+    JProperties.getDouble(new Properties(), "key");
+  }
+
+  @Test
+  public void testGetOptionalInt()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "23");
+    Assert.assertEquals(
+      23,
+      JProperties.getIntegerWithDefault(
+        properties,
+        "key",
+        Integer.valueOf(47)));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetOptionalIntBadType()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "Z");
+    JProperties.getIntegerWithDefault(
+      properties,
+      "key",
+      47);
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetOptionalIntOutOfRange()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "2323232323232323232323232323232323");
+    JProperties.getIntegerWithDefault(
+      properties,
+      "key",
+      47);
+  }
+
+  @Test
+  public void testGetOptionalIntMissing()
+    throws Exception
+  {
+    Assert.assertEquals(
+      47,
+      JProperties.getIntegerWithDefault(
+        new Properties(),
+        "key",
+        Integer.valueOf(47)));
+  }
+
+  @Test
+  public void testGetOptionalLong()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "23");
+    Assert.assertEquals(
+      23L,
+      JProperties.getLongWithDefault(
+        properties,
+        "key",
+        Long.valueOf(47)));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetOptionalLongBadType()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "Z");
+    JProperties.getLongWithDefault(
+      properties,
+      "key",
+      47);
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetOptionalLongOutOfRange()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "232323232323232323232323232323232323232323");
+    JProperties.getLongWithDefault(
+      properties,
+      "key",
+      47);
+  }
+
+  @Test
+  public void testGetOptionalLongMissing()
+    throws Exception
+  {
+    Assert.assertEquals(
+      47,
+      JProperties.getLongWithDefault(
+        new Properties(),
+        "key",
+        Long.valueOf(47)));
+  }
+
+  @Test
+  public void testGetOptionalDouble()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "23");
+    Assert.assertEquals(
+      23L,
+      JProperties.getDoubleWithDefault(
+        properties,
+        "key",
+        Double.valueOf(47.0)),
+      0.0);
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetOptionalDoubleBadType()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "Z");
+    JProperties.getDoubleWithDefault(
+      properties,
+      "key",
+      47);
+  }
+
+  @Test
+  public void testGetOptionalDoubleMissing()
+    throws Exception
+  {
+    Assert.assertEquals(
+      47.0,
+      JProperties.getDoubleWithDefault(
+        new Properties(),
+        "key",
+        Double.valueOf(47.0)),
+      0.0);
   }
 }

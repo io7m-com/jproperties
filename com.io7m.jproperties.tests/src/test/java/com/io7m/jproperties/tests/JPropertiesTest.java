@@ -32,6 +32,7 @@ import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.URI;
 import java.net.UnknownHostException;
+import java.time.Duration;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -799,5 +800,99 @@ public final class JPropertiesTest
         new Properties(),
         "key",
         InetAddress.getByName("localhost")));
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  @Test
+  public void testGetDuration()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "PT10M");
+    Assert.assertEquals(
+      Duration.parse("PT10M"),
+      JProperties.getDuration(properties, "key"));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetDurationBadType()
+    throws JPropertyNonexistent,
+    JPropertyIncorrectType, UnknownHostException
+  {
+    final var properties = new Properties();
+    properties.put("key", "not a uuid");
+    Assert.assertEquals(
+      Duration.parse("PT10M"),
+      JProperties.getDuration(properties, "key"));
+  }
+
+  @Test(expected = JPropertyNonexistent.class)
+  public void testGetDurationMissing()
+    throws Exception
+  {
+    JProperties.getDuration(new Properties(), "key");
+  }
+
+  @Test
+  public void testGetOptionalDuration()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "PT10M");
+    Assert.assertEquals(
+      Duration.parse("PT10M"),
+      JProperties.getDurationWithDefault(
+        properties,
+        "key",
+        Duration.parse("PT10M")));
+  }
+
+  @Test(expected = JPropertyIncorrectType.class)
+  public void testGetOptionalDurationBadType()
+    throws Exception
+  {
+    final var properties = new Properties();
+    properties.put("key", "not a uuid");
+    JProperties.getDurationWithDefault(
+      properties,
+      "key",
+      Duration.parse("PT10M"));
+  }
+
+  @Test
+  public void testGetOptionalDurationMissing()
+    throws Exception
+  {
+    Assert.assertEquals(
+      Duration.parse("PT10M"),
+      JProperties.getDurationWithDefault(
+        new Properties(),
+        "key",
+        Duration.parse("PT10M")));
   }
 }

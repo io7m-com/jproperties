@@ -42,9 +42,9 @@
         <c:change date="2021-05-28T00:00:00+00:00" summary="Add functions to parse URI, UUID, InetAddress values"/>
       </c:changes>
     </c:release>
-    <c:release date="2021-05-29T13:57:46+00:00" is-open="true" ticket-system="com.github.io7m.jproperties" version="3.1.0">
+    <c:release date="2021-05-29T14:08:45+00:00" is-open="false" ticket-system="com.github.io7m.jproperties" version="3.1.0">
       <c:changes>
-        <c:change date="2021-05-29T13:57:46+00:00" summary="Add Duration methods"/>
+        <c:change date="2021-05-29T00:00:00+00:00" summary="Add Duration methods"/>
       </c:changes>
     </c:release>
   </c:releases>

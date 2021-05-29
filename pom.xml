@@ -14,7 +14,7 @@
 
   <groupId>com.io7m.jproperties</groupId>
   <artifactId>com.io7m.jproperties</artifactId>
-  <version>3.0.0</version>
+  <version>3.1.0</version>
 
   <packaging>pom</packaging>
   <name>com.io7m.jproperties</name>

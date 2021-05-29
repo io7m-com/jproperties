@@ -27,6 +27,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.nio.file.Files;
+import java.time.Duration;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Properties;
@@ -341,6 +343,7 @@ public final class JProperties
    * @throws JPropertyNonexistent   If the key does not exist in the given properties.
    * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as an
    *                                integer.
+   * @since 3.0.0
    */
 
   public static int getInteger(
@@ -407,6 +410,7 @@ public final class JProperties
    * @throws JPropertyNonexistent   If the key does not exist in the given properties.
    * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as an
    *                                integer.
+   * @since 3.0.0
    */
 
   public static long getLong(
@@ -462,7 +466,7 @@ public final class JProperties
   }
 
   /**
-   * <p> Returns the integer value associated with {@code key} in the
+   * <p> Returns the double value associated with {@code key} in the
    * properties referenced by {@code properties}. </p>
    *
    * @param properties The loaded properties.
@@ -473,6 +477,7 @@ public final class JProperties
    * @throws JPropertyNonexistent   If the key does not exist in the given properties.
    * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as an
    *                                integer.
+   * @since 3.0.0
    */
 
   public static double getDouble(
@@ -488,7 +493,7 @@ public final class JProperties
   }
 
   /**
-   * <p> Returns the integer value associated with {@code key} in the
+   * <p> Returns the double value associated with {@code key} in the
    * properties referenced by {@code properties} if it exists, otherwise returns {@code other}.
    * </p>
    *
@@ -531,6 +536,7 @@ public final class JProperties
    * @throws JPropertyNonexistent   If the key does not exist in the given properties.
    * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as a
    *                                URI.
+   * @since 3.0.0
    */
 
   public static URI getURI(
@@ -597,6 +603,7 @@ public final class JProperties
    * @throws JPropertyNonexistent   If the key does not exist in the given properties.
    * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as a
    *                                UUID.
+   * @since 3.0.0
    */
 
   public static UUID getUUID(
@@ -663,6 +670,7 @@ public final class JProperties
    * @throws JPropertyNonexistent   If the key does not exist in the given properties.
    * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as a
    *                                InetAddress.
+   * @since 3.0.0
    */
 
   public static InetAddress getInetAddress(
@@ -716,6 +724,75 @@ public final class JProperties
       throw incorrectType(e, key, text, "InetAddress");
     }
   }
+
+
+  /**
+   * <p> Returns the Duration value associated with {@code key} in the
+   * properties referenced by {@code properties}. </p>
+   *
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as an Duration.
+   *
+   * @throws JPropertyNonexistent   If the key does not exist in the given properties.
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as a
+   *                                Duration.
+   * @since 3.1.0
+   */
+
+  public static Duration getDuration(
+    final Properties properties,
+    final String key)
+    throws JPropertyNonexistent, JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = getString(properties, key);
+    try {
+      return Duration.parse(text);
+    } catch (final DateTimeParseException e) {
+      throw incorrectType(e, key, text, "Duration");
+    }
+  }
+
+  /**
+   * <p> Returns the Duration value associated with {@code key} in the
+   * properties referenced by {@code properties} if it exists, otherwise returns {@code other}.
+   * </p>
+   *
+   * @param other      The default value
+   * @param properties The loaded properties.
+   * @param key        The requested key.
+   *
+   * @return The value associated with the key, parsed as an Duration.
+   *
+   * @throws JPropertyIncorrectType If the value associated with the key cannot be parsed as a
+   *                                Duration.
+   * @since 3.1.0
+   */
+
+  public static Duration getDurationWithDefault(
+    final Properties properties,
+    final String key,
+    final Duration other)
+    throws JPropertyIncorrectType
+  {
+    Objects.requireNonNull(properties, "Properties");
+    Objects.requireNonNull(key, "Key");
+
+    final var text = properties.getProperty(key);
+    if (text == null) {
+      return other;
+    }
+    try {
+      return Duration.parse(text);
+    } catch (final DateTimeParseException e) {
+      throw incorrectType(e, key, text, "Duration");
+    }
+  }
+
 
   private static JPropertyIncorrectType incorrectType(
     final Exception cause,

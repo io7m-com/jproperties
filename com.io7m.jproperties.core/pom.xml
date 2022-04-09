@@ -8,47 +8,30 @@
   <parent>
     <groupId>com.io7m.jproperties</groupId>
     <artifactId>com.io7m.jproperties</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
   </parent>
   <artifactId>com.io7m.jproperties.core</artifactId>
 
   <packaging>jar</packaging>
   <name>com.io7m.jproperties.core</name>
   <description>Typed property handling (Core)</description>
-  <url>http://io7m.github.io/jproperties/</url>
+  <url>https://www.io7m.com/software/jproperties</url>
 
   <dependencies>
     <dependency>
       <groupId>com.io7m.junreachable</groupId>
       <artifactId>com.io7m.junreachable.core</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.annotation.bundle</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.annotation.versioning</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <!-- Check style -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-      </plugin>
-
-      <!-- Spot bugs -->
-      <plugin>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-      </plugin>
-
-      <!-- Produce OSGi manifest -->
-      <plugin>
-        <groupId>biz.aQute.bnd</groupId>
-        <artifactId>bnd-maven-plugin</artifactId>
-        <configuration>
-          <bnd><![CDATA[
-            Export-Package: com.io7m.jproperties
-]]></bnd>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 
 </project>

@@ -15,7 +15,7 @@
   <packaging>jar</packaging>
   <name>com.io7m.jproperties.documentation</name>
   <description>Typed property handling (Documentation)</description>
-  <url>http://io7m.github.io/jproperties/</url>
+  <url>https://www.io7m.com/software/jproperties</url>
 
   <properties>
     <mdep.analyze.skip>true</mdep.analyze.skip>
@@ -33,6 +33,16 @@
       <version>${project.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.annotation.bundle</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.annotation.versioning</artifactId>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>com.io7m.primogenitor</groupId>
       <artifactId>com.io7m.primogenitor.support</artifactId>

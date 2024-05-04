@@ -16,8 +16,8 @@ jproperties
 
 ## jproperties
 
-Java functions to access values from `java.util.Properties` collections
-with
+Java functions to access values from `java.util.Properties` collections in
+a typed manner.
 
 ## Features
 

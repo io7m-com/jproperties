@@ -8,7 +8,7 @@
          <img src="https://img.shields.io/maven-central/v/com.io7m.jproperties/com.io7m.jproperties.svg?style=flat-square"
               alt="Maven Central"/>
       </a>
-      <a href="https://codecov.io/gh/io7m/jproperties">
+      <a href="https://codecov.io/gh/io7m-com/jproperties">
          <img src="https://img.shields.io/codecov/c/github/io7m-com/jproperties.svg?style=flat-square"
               alt="Codecov"/>
       </a>

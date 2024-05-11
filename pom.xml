@@ -14,7 +14,7 @@
 
   <groupId>com.io7m.jproperties</groupId>
   <artifactId>com.io7m.jproperties</artifactId>
-  <version>4.0.0</version>
+  <version>4.0.1-SNAPSHOT</version>
 
   <packaging>pom</packaging>
   <name>com.io7m.jproperties</name>
@@ -29,7 +29,7 @@
 
   <properties>
     <!-- Configuration. -->
-    <io7m.api.previousVersion>3.2.0</io7m.api.previousVersion>
+    <io7m.api.previousVersion>4.0.0</io7m.api.previousVersion>
     <io7m.java.targetJavaVersion>21</io7m.java.targetJavaVersion>
 
     <!-- io7m dependencies. -->

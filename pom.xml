@@ -9,12 +9,12 @@
   <parent>
     <groupId>com.io7m.primogenitor</groupId>
     <artifactId>com.io7m.primogenitor.full</artifactId>
-    <version>7.0.0</version>
+    <version>8.2.0</version>
   </parent>
 
   <groupId>com.io7m.jproperties</groupId>
   <artifactId>com.io7m.jproperties</artifactId>
-  <version>3.2.0</version>
+  <version>4.0.0</version>
 
   <packaging>pom</packaging>
   <name>com.io7m.jproperties</name>
@@ -23,28 +23,31 @@
 
   <modules>
     <module>com.io7m.jproperties.core</module>
-    <module>com.io7m.jproperties.documentation</module>
     <module>com.io7m.jproperties.monad</module>
     <module>com.io7m.jproperties.tests</module>
   </modules>
 
   <properties>
-    <io7m.api.previousVersion>2.0.0</io7m.api.previousVersion>
-    <io7m.org.immutables.version>2.7.5</io7m.org.immutables.version>
-    <io7m.immutables.style.version>0.0.1</io7m.immutables.style.version>
+    <!-- Configuration. -->
+    <io7m.api.previousVersion>3.2.0</io7m.api.previousVersion>
+    <io7m.java.targetJavaVersion>21</io7m.java.targetJavaVersion>
+
+    <!-- io7m dependencies. -->
+    <io7m.immutables.style.version>1.0.0</io7m.immutables.style.version>
+    <io7m.org.immutables.version>2.10.1</io7m.org.immutables.version>
   </properties>
 
   <licenses>
     <license>
-      <name>ISC License</name>
+      <name>ISC</name>
       <url>https://www.io7m.com/license/isc.txt</url>
     </license>
   </licenses>
 
   <scm>
-    <url>https://github.com/io7m/jproperties</url>
-    <connection>scm:git:https://github.com/io7m/jproperties</connection>
-    <developerConnection>scm:git:https://github.com/io7m/jproperties</developerConnection>
+    <url>https://www.github.com/io7m-com/jproperties</url>
+    <connection>scm:git:https://www.github.com/io7m-com/jproperties</connection>
+    <developerConnection>scm:git:https://www.github.com/io7m-com/jproperties</developerConnection>
   </scm>
 
   <developers>
@@ -57,7 +60,7 @@
   </developers>
 
   <issueManagement>
-    <url>http://github.com/io7m/jproperties/issues</url>
+    <url>http://www.github.com/io7m-com/jproperties/issues</url>
     <system>GitHub Issues</system>
   </issueManagement>
 
@@ -69,13 +72,17 @@
     </site>
     <repository>
       <id>sonatype-nexus-staging</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
+    <snapshotRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
   </distributionManagement>
 
   <ciManagement>
     <system>GitHub Actions</system>
-    <url>https://github.com/jproperties/actions</url>
+    <url>https://www.github.com/io7m-com/jproperties/actions</url>
   </ciManagement>
 
   <prerequisites>
@@ -87,7 +94,7 @@
       <dependency>
         <groupId>com.io7m.junreachable</groupId>
         <artifactId>com.io7m.junreachable.core</artifactId>
-        <version>4.0.0</version>
+        <version>4.0.2</version>
       </dependency>
 
       <dependency>
@@ -101,8 +108,8 @@
         <version>1.1.2</version>
       </dependency>
       <dependency>
-        <groupId>com.io7m.immutables.style</groupId>
-        <artifactId>com.io7m.immutables.style</artifactId>
+        <groupId>com.io7m.immutables-style</groupId>
+        <artifactId>com.io7m.immutables-style</artifactId>
         <version>${io7m.immutables.style.version}</version>
       </dependency>
       <dependency>
@@ -113,7 +120,7 @@
       <dependency>
         <groupId>com.io7m.primogenitor</groupId>
         <artifactId>com.io7m.primogenitor.support</artifactId>
-        <version>7.0.0</version>
+        <version>8.2.0</version>
       </dependency>
 
       <dependency>
@@ -134,8 +141,8 @@
           <configuration>
             <annotationProcessorPaths>
               <dependency>
-                <groupId>com.io7m.immutables.style</groupId>
-                <artifactId>com.io7m.immutables.style</artifactId>
+                <groupId>com.io7m.immutables-style</groupId>
+                <artifactId>com.io7m.immutables-style</artifactId>
                 <version>${io7m.immutables.style.version}</version>
               </dependency>
               <dependency>
@@ -145,13 +152,6 @@
               </dependency>
             </annotationProcessorPaths>
           </configuration>
-        </plugin>
-
-        <!-- jstructural plugin for generating documentation. -->
-        <plugin>
-          <groupId>com.io7m.jstructural</groupId>
-          <artifactId>io7m-jstructural-maven-plugin</artifactId>
-          <version>5.0.0</version>
         </plugin>
 
         <!-- Spot bugs -->

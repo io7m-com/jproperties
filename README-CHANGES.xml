@@ -52,9 +52,10 @@
         <c:change date="2022-04-09T00:00:00+00:00" summary="Update OSGi metadata"/>
       </c:changes>
     </c:release>
-    <c:release date="2024-05-11T09:24:23+00:00" is-open="true" ticket-system="com.github.io7m.jproperties" version="4.0.0">
+    <c:release date="2024-05-11T09:34:34+00:00" is-open="false" ticket-system="com.github.io7m.jproperties" version="4.0.0">
       <c:changes>
-        <c:change compatible="false" date="2024-05-11T09:24:23+00:00" summary="Require JDK 21"/>
+        <c:change date="2024-04-19T00:00:00+00:00" summary="Update org.immutables:value:2.10.0 → 2.10.1."/>
+        <c:change compatible="false" date="2024-05-11T00:00:00+00:00" summary="Require JDK 21"/>
       </c:changes>
     </c:release>
   </c:releases>

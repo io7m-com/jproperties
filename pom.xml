@@ -28,9 +28,12 @@
   </modules>
 
   <properties>
-    <io7m.api.previousVersion>2.0.0</io7m.api.previousVersion>
-    <io7m.immutables.style.version>0.0.1</io7m.immutables.style.version>
+    <!-- Configuration. -->
+    <io7m.api.previousVersion>3.1.0</io7m.api.previousVersion>
     <io7m.java.targetJavaVersion>21</io7m.java.targetJavaVersion>
+
+    <!-- io7m dependencies. -->
+    <io7m.immutables.style.version>1.0.0</io7m.immutables.style.version>
     <io7m.org.immutables.version>2.10.1</io7m.org.immutables.version>
   </properties>
 
@@ -105,8 +108,8 @@
         <version>1.1.2</version>
       </dependency>
       <dependency>
-        <groupId>com.io7m.immutables.style</groupId>
-        <artifactId>com.io7m.immutables.style</artifactId>
+        <groupId>com.io7m.immutables-style</groupId>
+        <artifactId>com.io7m.immutables-style</artifactId>
         <version>${io7m.immutables.style.version}</version>
       </dependency>
       <dependency>
@@ -138,8 +141,8 @@
           <configuration>
             <annotationProcessorPaths>
               <dependency>
-                <groupId>com.io7m.immutables.style</groupId>
-                <artifactId>com.io7m.immutables.style</artifactId>
+                <groupId>com.io7m.immutables-style</groupId>
+                <artifactId>com.io7m.immutables-style</artifactId>
                 <version>${io7m.immutables.style.version}</version>
               </dependency>
               <dependency>

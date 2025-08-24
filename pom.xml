@@ -34,7 +34,7 @@
 
     <!-- io7m dependencies. -->
     <io7m.immutables.style.version>1.0.0</io7m.immutables.style.version>
-    <io7m.org.immutables.version>2.10.1</io7m.org.immutables.version>
+    <io7m.org.immutables.version>2.11.1</io7m.org.immutables.version>
   </properties>
 
   <licenses>
